@@ -116,7 +116,9 @@ def numexpr_evaluate(ex: str, *args, **kwargs):
     Returns:
         Any: the returned value from numexpr
     """
-    parse_success, parse_results = get_parser().run_tests(ex)
+    parse_success, parse_results = get_parser().run_tests(
+        ex, print_results=False
+    )
     if not parse_success:
         raise ValueError(parse_results[0][1])
     return numexpr.evaluate(ex, *args, **kwargs)
