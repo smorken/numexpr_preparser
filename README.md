@@ -22,6 +22,12 @@ constant values supported are:
  * floating point with scientific and complex notation
  * integers
 
+Installation
+
+```
+pip install numexpr_preparser
+```
+
 Example usage:
 
 Using as a pre-parser, to reject expressions that are not strictly infix
