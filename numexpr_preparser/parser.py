@@ -8,7 +8,7 @@ from pyparsing import (
     Optional,
     delimited_list,
     ParserElement,
-    QuotedString,
+    # QuotedString,
 )
 import numexpr
 from pyparsing.common import pyparsing_common
@@ -58,8 +58,8 @@ def get_parser() -> Forward:
     ParserElement.enablePackrat()
     integer = pyparsing_common.integer
     real = pyparsing_common.real | pyparsing_common.sci_real
-    double_quoted = QuotedString('"')
-    single_quoted = QuotedString('"')
+    # double_quoted = QuotedString('"')
+    # single_quoted = QuotedString('"')
     imaginary = (real | integer) + one_of("j J")
     arith_expr = Forward()
     fn_call = Group(
@@ -73,8 +73,8 @@ def get_parser() -> Forward:
         | imaginary
         | real
         | integer
-        | double_quoted
-        | single_quoted
+        # | double_quoted
+        # | single_quoted
         | pyparsing_common.identifier
     )
 
