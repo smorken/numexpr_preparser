@@ -2,7 +2,7 @@
 # Infix pre-parser for [numexpr](https://github.com/pydata/numexpr)
 
 This is an infix parser for the basic syntax outlined in the `numexpr` user guide.
-It may not correctly parse every supported numexpr expression.
+It may not correctly parse every supported numexpr expression, but it does offer strict parsing of a subset of numexpr syntax.
 
 It is defined using the [pyparsing package](https://pypi.org/project/pyparsing/)
 
@@ -32,8 +32,10 @@ import numexpr
 from numexpr_preparser import parser as preparser
 
 def numexpr_safe_evaluate(ex: str, *args, **kwargs):
-    parse_success, results = preparser.get_parser().run_tests(ex)
+    parse_success, results = preparser.get_parser().run_tests(
+        ex, print_results=False
+    )
     if not parse_success:
         raise ValueError(results[0][1])
-    numexpr.evaluate(ex, *args, **kwargs)
+    return numexpr.evaluate(ex, *args, **kwargs)
 ```
