@@ -35,7 +35,7 @@ def test_failing_expressions():
             fc("function")(
                 fc("Popen")("echo verybad",shell=True),{}
             )()
-        )()""",  # unsafe expression (see https://github.com/pydata/numexpr/issues/442)
+        )()""",  # see https://github.com/pydata/numexpr/issues/442
         "a = b",  # unsupported operator =
         "'string'",  # strings not yet supported
         "b'binary string'",  # strings not yet supported
