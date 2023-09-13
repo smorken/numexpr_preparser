@@ -32,7 +32,7 @@ import numexpr
 from numexpr_preparser import parser as preparser
 
 def numexpr_safe_evaluate(ex: str, *args, **kwargs):
-    parse_success, results = parser.run_tests(ex)
+    parse_success, results = preparser.get_parser().run_tests(ex)
     if not parse_success:
         raise ValueError(results[0][1])
     numexpr.evaluate(ex, *args, **kwargs)
