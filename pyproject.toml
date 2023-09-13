@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "numexpr_preparser"
+version = "1.0.0"
+authors = [
+  { name="Scott Morken", email="scottm361@gmail.com" },
+]
+description = "Infix pre-parser/expression validator for numexpr"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "numexpr",
+    "pyparsing",
+]
+
+
+[project.urls]
+"Homepage" = "https://github.com/smorken/sphinx_action_example"
+"Bug Tracker" = "https://github.com/smorken/sphinx_action_example/issues"
+
+[tools.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
