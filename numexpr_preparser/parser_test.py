@@ -1,12 +1,11 @@
 import pytest
 from mock import MagicMock
 from mock import patch
-import numexpr_expression_parser
+from numexpr_preparser import parser
 
 
 def test_passing_expressions():
-    parser = numexpr_expression_parser.get_parser()
-    result, _ = parser.runTests(
+    result, _ = parser.get_parser().runTests(
         [
             "where(a, 1, 2) ==  b",  # function argument list
             "b ** 1.59123",  # regular floating point numbers
@@ -42,9 +41,9 @@ def test_failing_expressions():
         "b'binary string'",  # strings not yet supported
     ]
 
-    parser = numexpr_expression_parser.get_parser()
+    _parser = parser.get_parser()
     for test in tests:
-        result, _ = parser.run_tests(test)
+        result, _ = _parser.run_tests(test)
         assert not result
 
 
@@ -72,41 +71,41 @@ def test_full_binary_operator_support():
         "<<",
         ">>",
     ]
-    parser = numexpr_expression_parser.get_parser()
+    _parser = parser.get_parser()
     for op in binary_operators:
-        result, _ = parser.run_tests([f"a {op} b"])
+        result, _ = _parser.run_tests([f"a {op} b"])
         assert result
 
 
 def test_numexpr_function_support():
-    functions = numexpr_expression_parser.NUMEXPR_FUNCS
+    functions = parser.NUMEXPR_FUNCS
 
-    parser = numexpr_expression_parser.get_parser()
+    _parser = parser.get_parser()
     tests = (
         [f"{f}(a)" for f in functions] +
         [f"{f}(1,a)" for f in functions]
     )
-    result, out = parser.run_tests(tests)
+    result, out = _parser.run_tests(tests)
     if not result:
         raise
     assert result
 
 
 def test_full_unary_operator_support():
-    parser = numexpr_expression_parser.get_parser()
-    result, _ = parser.run_tests(["a - b"])
+    _parser = parser.get_parser()
+    result, _ = _parser.run_tests(["a - b"])
     assert result
 
 
-@patch("numexpr_expression_parser.numexpr.evaluate")
+@patch("numexpr_preparser.parser.numexpr.evaluate")
 def test_evaluate_safe_with_error(evaluate: MagicMock):
     with pytest.raises(ValueError):
-        numexpr_expression_parser.numexpr_evaluate("non_supported_func(1) > 5")
+        parser.numexpr_evaluate("non_supported_func(1) > 5")
         assert evaluate.call_count == 0
 
 
-@patch("numexpr_expression_parser.numexpr.evaluate")
+@patch("numexpr_preparser.parser.numexpr.evaluate")
 def test_evaluate_wrapper(evaluate: MagicMock):
-    numexpr_expression_parser.numexpr_evaluate("sin(a) > 5", 1, a=2)
+    parser.numexpr_evaluate("sin(a) > 5", 1, a=2)
     assert evaluate.call_count == 1
     evaluate.assert_called_once_with("sin(a) > 5", 1, a=2)
