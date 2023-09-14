@@ -57,7 +57,7 @@ def get_parser() -> Forward:
     """
     ParserElement.enablePackrat()
     integer = pyparsing_common.integer
-    real = pyparsing_common.real | pyparsing_common.sci_real
+    real = pyparsing_common.sci_real | pyparsing_common.real
     # double_quoted = QuotedString('"')
     # single_quoted = QuotedString('"')
     imaginary = (real | integer) + one_of("j J")
