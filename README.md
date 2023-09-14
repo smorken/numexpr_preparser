@@ -1,8 +1,11 @@
 
 # Infix pre-parser for [numexpr](https://github.com/pydata/numexpr)
 
+
 This is an infix parser for the basic syntax outlined in the `numexpr` user guide.
 It may not correctly parse every supported numexpr expression, but it does offer strict parsing of a subset of numexpr syntax.
+
+This code has no affiliation with the numexpr project itself.
 
 It is defined using the [pyparsing package](https://pypi.org/project/pyparsing/)
 
