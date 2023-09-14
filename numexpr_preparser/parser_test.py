@@ -16,7 +16,8 @@ def test_passing_expressions():
             "1 + 2.0 + _abc + sin(cos(o))",  # nested function
             "1 + 2.0 + __abc",  # dunder "__abc" is technically valid
             "((c<32.0) | (d==-22.0))",  # boolean expression, nested brackets
-            "z==True"  #
+            "z==True",  # True is going to be parsed as a regular identifier
+            "3.45e-4"   # more scientific notation testing
         ]
     )
     assert result
@@ -24,7 +25,7 @@ def test_passing_expressions():
 
 def test_failing_expressions():
     tests = [
-        "eval(12)"  # unsupported function
+        "eval(12)",  # unsupported function
         """(lambda fc=(
             lambda n: [
                 c for c in
