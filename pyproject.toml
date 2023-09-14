@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "numexpr_preparser"
-version = "1.0.0"
+version = "1.1.0"
 authors = [
   { name="Scott Morken", email="scottm361@gmail.com" },
 ]
@@ -22,10 +22,9 @@ dependencies = [
     "pyparsing",
 ]
 
-
 [project.urls]
-"Homepage" = "https://github.com/smorken/sphinx_action_example"
-"Bug Tracker" = "https://github.com/smorken/sphinx_action_example/issues"
+"Homepage" = https://github.com/smorken/numexpr_preparser"
+"Bug Tracker" = "https://github.com/smorken/numexpr_preparser/issues"
 
 [tools.setuptools]
 include-package-data = true
